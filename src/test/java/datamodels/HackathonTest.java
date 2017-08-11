@@ -28,5 +28,4 @@ public class HackathonTest {
         Hackathon hack2 = new Hackathon("Python");
         assertEquals(2, Hackathon.getInstances().size());
     }
-
 }
