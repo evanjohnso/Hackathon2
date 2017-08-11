@@ -1,0 +1,17 @@
+{{#partial "content"}}
+
+    <div class="jumbotron">Local Hack-A-thons!</div>
+
+    <div class="row container-fluid">
+    {{#each hacks}}
+        <div class="container-fluid col-md-4">
+            <h1>{{focus}} </h1>
+            <h6>{{location}}</h6>
+            <a href="/hackathons/{{focus}}"><button class="btn btn-info">Inspect</button></a>
+        </div>
+    {{/each}}
+    </div>
+
+{{/partial}}
+
+{{> layout.hbs}}

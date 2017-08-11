@@ -9,3 +9,24 @@ body {
   background-size: cover;
   background-attachment: fixed;
 }
+
+.col-md-4 {
+  text-align: center;
+  color: white;
+}
+
+.jumbotron {
+  text-align: center;
+  font-size: 100px;
+  color: white;
+  background: inherit;
+}
+
+.jumbotron h6 {
+  font-size: 16px;
+}
+
+#noTeams {
+  text-align: center;
+  color: white;
+}

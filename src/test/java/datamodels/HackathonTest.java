@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class HackathonTest {
     public Hackathon setUp() {
-        return new Hackathon("Java");
+        return new Hackathon("Java", "Portland, OR");
     }
     public Team setUpTeam() {
         return new Team("Ging Squad", "One day we'll rull the world", 7);
@@ -29,7 +29,7 @@ public class HackathonTest {
     @Test
     public void createTwoHackathonsAndKeepTrackOfThemStatically_true() {
         Hackathon testHack = setUp();
-        Hackathon hack2 = new Hackathon("Python");
+        Hackathon hack2 = new Hackathon("Python", "Seattle, WA");
         assertEquals(2, Hackathon.getInstances().size());
     }
 

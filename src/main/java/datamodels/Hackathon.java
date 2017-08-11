@@ -7,9 +7,11 @@ public class Hackathon {
     private String focus;
     private static List<Hackathon> instances = new ArrayList<>();
     private static ArrayList<Team> teams = new ArrayList<>();
+    private String location;
 
-    public Hackathon(String focus) {
+    public Hackathon(String focus, String location) {
         this.focus = focus;
+        this.location = location;
         instances.add(this);
     }
 
@@ -27,5 +29,22 @@ public class Hackathon {
     }
     public int getNumberOfTeams() {
         return teams.size();
+    }
+    public String getLocation() {
+        return location;
+    }
+    public String getFocus() {
+        return focus;
+    }
+
+    public static Hackathon findHack(String focus) {
+        Hackathon thisHack = null;
+        for (Hackathon hack: instances) {
+            String thisFocus = hack.getFocus();
+            if (thisFocus.equals(focus)) {
+                thisHack = hack;
+            }
+        }
+        return thisHack;
     }
 }
