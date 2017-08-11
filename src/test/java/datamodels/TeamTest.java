@@ -24,7 +24,7 @@ public class TeamTest {
     @Test
     public void createTeamAndCheckMembersArray() {
         Team testTeam = setUp();
-        assertEquals(8, testTeam.getTeamSize());
+        assertEquals(7, testTeam.getTeamSize());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class TeamTest {
         Members newGuy = new Members();
         newGuy.setNewMember("Evan", "Portland", 25);
         testTeam.addMember(newGuy);
-        assertEquals(9, testTeam.getTeamSize());
+        assertEquals(8, testTeam.getTeamSize());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class TeamTest {
         Members newGuy = new Members();
         newGuy.setNewMember("Evan", "Portland", 25);
         testTeam.addMember(newGuy);
-        assertEquals(newGuy, testTeam.findMember(newGuy) );
+        assertEquals(newGuy, testTeam.findMember("Evan") );
     }
 
     @Test
@@ -51,7 +51,7 @@ public class TeamTest {
         Members newGuy = new Members();
         newGuy.setNewMember("Evan", "Portland", 25);
         testTeam.addMember(newGuy);
-        assertEquals(true, testTeam.removeMember(newGuy));
+        assertEquals(true, testTeam.removeMember("Evan"));
     }
 
 }

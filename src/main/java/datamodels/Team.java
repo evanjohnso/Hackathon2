@@ -42,9 +42,9 @@ public class Team {
                 //    theSquad.remove(member);
                 //Confused as to why this doesn't work
 
-    public boolean removeMember(Members ditchEm) {
+    public boolean removeMember(String theirName) {
         boolean removed = true;
-        Members adios = findMember(ditchEm);
+        Members adios = findMember(theirName);
         if (adios != null)
             theSquad.remove(adios);
         else
@@ -52,10 +52,11 @@ public class Team {
         return removed;
     }
 
-    public Members findMember(Members individual) {
+    public Members findMember(String individualName) {
         Members found = null;
         for (Members member: theSquad) {
-            if (member == individual)
+            String theirName = member.getMemberName();
+            if (individualName.equals(theirName))
                 found = member;
         }
         return found;

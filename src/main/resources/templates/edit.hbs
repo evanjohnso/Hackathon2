@@ -7,7 +7,12 @@
         <div class="container col-md-4">
             <h1>Add Member</h1>
             <h3>We just need a little bit of information about them</h3>
+
             <form action="/team/addMember" method="post">
+                <div class="form-group">
+                    <label for="squad">Team Name: </label>
+                    <input id="squad" name="squad" type="text" class="inputs" required>
+                </div>
                 <div class="form-group">
                     <label for="name">Name: </label>
                     <input id="name" name="name" type="text" class="inputs" required>
@@ -39,19 +44,15 @@
         </div>
         <div class="container col-md-4">
             <h1>Remove Member</h1>
-            <h3>We just need a bit of information to remove the right person</h3>
+            <h3>All we need is the Squad Name and their name</h3>
             <form action="/team/removeMember" method="post">
+                <div class="form-group">
+                    <label for="teamName">Team Name: </label>
+                    <input name="teamName" type="text" class="inputs" required>
+                </div>
                 <div class="form-group">
                     <label for="noName">Their Name:</label>
                     <input id="noName" name="noName" type="text" class="inputs" required>
-                </div>
-                <div class="form-group">
-                    <label for="noCity">Their City: </label>
-                    <input id="noCity" name="noCity" type="text" class="inputs"required>
-                </div>
-                <div class="form-group">
-                    <label for="noAge">Their Age: </label>
-                    <input id="noAge" name="noAge" type="number" class="inputs" required>
                 </div>
                 <button type="submit" class="btn btn-info">Remove</button>
             </form>

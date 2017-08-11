@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Hackathon {
     private String focus;
-    private static List<Hackathon> instances = new ArrayList<>();
+    private static ArrayList<Hackathon> instances = new ArrayList<>();
     private ArrayList<Team> teams = new ArrayList<>();
     private String location;
 
@@ -21,7 +21,7 @@ public class Hackathon {
     }
 
     //Getters
-    public static List<Hackathon> getInstances() {
+    public static ArrayList<Hackathon> getInstances() {
         return instances;
     }
     public ArrayList<Team> getTeams() {

@@ -1,4 +1,5 @@
 import datamodels.Hackathon;
+import datamodels.Members;
 import datamodels.Team;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -65,8 +66,9 @@ public class App {
             Team newTeam = new Team(newName, newBlurb, starters);
             Hackathon thisHack = Hackathon.findHack(event);
             thisHack.addTeam(newTeam);
-            return new ModelAndView(data, "success.hbs");
-        }, new HandlebarsTemplateEngine());
+            response.redirect("/hackathons");
+            return null;
+        });
 
         //If team wants to edit or remove team members
         get("/edit", (request, response) -> {
@@ -76,7 +78,7 @@ public class App {
 //            data.put("team", theTeam);
             return new ModelAndView(data, "edit.hbs");
         }, new HandlebarsTemplateEngine());
-
+        //Update name
         post("/team/changedName", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
             //Take user input
@@ -89,17 +91,35 @@ public class App {
             response.redirect("/hackathons");
             return null;
         });
-
+        //Add new team member
         post("/team/addMember", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
-            String newName = request.queryParams("newName");
+            String teamName = request.queryParams("squad");
+            String name = request.queryParams("name");
+            String city = request.queryParams("city");
+            int age = Integer.parseInt(request.queryParams("age"));
+            Members newGuy = new Members();
+            newGuy.setNewMember(name, city, age);
+
+            //Find what team they are on
+            Team thisTeam = Team.findTeam(teamName);
+            if (thisTeam != null)
+                thisTeam.addMember(newGuy);
             response.redirect("/hackathons");
             return null;
         });
-
+        //Remove specific team member
         post("/team/removeMember", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
-            String newName = request.queryParams("newName");
+            String teamName = request.queryParams("teamName");
+            String name = request.queryParams("noName");
+
+            //Find team they are on and nuke them
+            Team thisTeam = Team.findTeam(teamName);
+            if (thisTeam != null) {
+                thisTeam.removeMember(name);
+            }
+
             response.redirect("/hackathons");
             return null;
         });
