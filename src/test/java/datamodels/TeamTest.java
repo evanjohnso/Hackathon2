@@ -51,7 +51,7 @@ public class TeamTest {
         Members newGuy = new Members();
         newGuy.setNewMember("Evan", "Portland", 25);
         testTeam.addMember(newGuy);
-        assertEquals(true, testTeam.removeMember("Evan"));
+        assertEquals(true, testTeam.removeMember(newGuy));
     }
 
 }

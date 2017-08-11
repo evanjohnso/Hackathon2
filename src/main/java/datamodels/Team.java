@@ -32,15 +32,13 @@ public class Team {
         this.theSquad.add(additional);
     }
 
-    public boolean removeMember(String name) {
+    public boolean removeMember(Members ditchEm) {
         boolean removed = true;
-        for (Members individual: theSquad) {
-            String thisName = individual.getMemberName();
-            if (thisName.equals(name))
-                theSquad.remove(individual);
-            else
-                removed = false;
-        }
+        Members adios = findMember(ditchEm);
+        if (adios != null)
+            theSquad.remove(adios);
+        else
+            removed = false;
         return removed;
     }
 
