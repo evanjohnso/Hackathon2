@@ -22,4 +22,11 @@ public class HackathonTest {
         assertEquals(true, testHack instanceof Hackathon);
     }
 
+    @Test
+    public void createTwoHackathonsAndKeepTrackOfThemStatically_true() {
+        Hackathon testHack = setUp();
+        Hackathon hack2 = new Hackathon("Python");
+        assertEquals(2, Hackathon.getInstances().size());
+    }
+
 }
