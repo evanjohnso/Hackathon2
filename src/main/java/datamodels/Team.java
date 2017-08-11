@@ -7,14 +7,16 @@ import java.util.List;
 public class Team {
     private String teamName;
     private String teamBlurb;
-    private List<Members> theSquad = new ArrayList<Members>();
+    private ArrayList<Members> theSquad = new ArrayList<Members>();
 
 
     //Constructor
     public Team (String teamName, String teamBlurb, int initialMembers) {
         this.teamName = teamName;
         this.teamBlurb = teamBlurb;
-        setMembers(initialMembers);
+        //Add member skeletons to have information updated later closer to start date
+        for (int i=0; i <= initialMembers; i++)
+            theSquad.add(new Members());
     }
 
     //Setters
@@ -26,11 +28,29 @@ public class Team {
         this.teamBlurb = teamBlurb;
     }
 
-    public void setMembers(int additional) {
-        for (int i = 0; i <= additional; i++) {
-            theSquad.add(new Members());
-        }
+    public void addMember(Members additional) {
+        this.theSquad.add(additional);
+    }
 
+    public boolean removeMember(String name) {
+        boolean removed = true;
+        for (Members individual: theSquad) {
+            String thisName = individual.getMemberName();
+            if (thisName.equals(name))
+                theSquad.remove(individual);
+            else
+                removed = false;
+        }
+        return removed;
+    }
+
+    public Members findMember(Members individual) {
+        Members found = null;
+        for (Members member: theSquad) {
+            if (member == individual)
+                found = member;
+        }
+        return found;
     }
 
     //Getters
@@ -42,11 +62,11 @@ public class Team {
         return teamBlurb;
     }
 
-    public int getMembers() {
+    public int getTeamSize() {
         return theSquad.size();
     }
 
-    public int getTheSquad() {
-        return theSquad.size();
+    public ArrayList<Members> getTheSquad() {
+        return theSquad;
     }
 }

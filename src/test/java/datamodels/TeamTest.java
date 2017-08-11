@@ -24,7 +24,34 @@ public class TeamTest {
     @Test
     public void createTeamAndCheckMembersArray() {
         Team testTeam = setUp();
-        assertEquals(8, testTeam.getTheSquad());
+        assertEquals(8, testTeam.getTeamSize());
+    }
+
+    @Test
+    public void addTeamMembersWithInformation_true() {
+        Team testTeam = setUp();
+        Members newGuy = new Members();
+        newGuy.setNewMember("Evan", "Portland", 25);
+        testTeam.addMember(newGuy);
+        assertEquals(9, testTeam.getTeamSize());
+    }
+
+    @Test
+    public void findTeamMembers_true() {
+        Team testTeam = setUp();
+        Members newGuy = new Members();
+        newGuy.setNewMember("Evan", "Portland", 25);
+        testTeam.addMember(newGuy);
+        assertEquals(newGuy, testTeam.findMember(newGuy) );
+    }
+
+    @Test
+    public void removeTeamMembers_true() {
+        Team testTeam = setUp();
+        Members newGuy = new Members();
+        newGuy.setNewMember("Evan", "Portland", 25);
+        testTeam.addMember(newGuy);
+        assertEquals(true, testTeam.removeMember("Evan"));
     }
 
 }
