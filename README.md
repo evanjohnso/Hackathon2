@@ -1,18 +1,22 @@
 # Hack-A-Thon
 
-####  Users can design their own event at this event planning service. We will calculate a price and based off the inputs. There are discounts and packages available as well!
+####  A limited list of West Coast Hackathon's for display and perusing capability!
 
 #### Evan Johnson
 
 ## Description
-_Stores user information about specific travel destinations_
+_Allows users to browse West Coast Hackathon's and track the teams enrolled_
 * Java
+* Spark
+* Handlebars
 
 ## Development Specifications
 | Behavior      | Example Input         | Example Output        |
 | ------------- | ------------- | ------------- |
-| Produce a starting price | Event details  |  Price  |
-| Include discount options | Price and discount  |  New Price  |
+| Add a new team to compete | Team Details  |  Team to list  |
+| Change name of team | Old name  |  New name  |
+| Add member to team | Member specifics  |  Member added to team  |
+| Remove member from team | Member Specifics  |  Member removed  |
 
 ## Setup/Installation Requirements
 _Use 'git clone' from the terminal and open in browser_
