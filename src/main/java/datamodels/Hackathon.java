@@ -6,7 +6,7 @@ import java.util.List;
 public class Hackathon {
     private String focus;
     private static List<Hackathon> instances = new ArrayList<>();
-    private static ArrayList<Team> teams = new ArrayList<>();
+    private ArrayList<Team> teams = new ArrayList<>();
     private String location;
 
     public Hackathon(String focus, String location) {

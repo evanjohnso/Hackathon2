@@ -42,4 +42,12 @@ public class HackathonTest {
         testHack.addTeam(team2);
         assertEquals(2, testHack.getNumberOfTeams());
     }
+
+    @Test
+    public void createHackathonAndSearchForIndividualByName_Hack() {
+        Hackathon Java = new Hackathon("Java", "Portland, OR");
+        Hackathon Python = new Hackathon("Python", "Seattle, WA");
+        Hackathon Ruby = new Hackathon("Ruby", "San Fransisco, CA");
+        assertEquals(Ruby, Hackathon.findHack("Ruby"));
+    }
 }

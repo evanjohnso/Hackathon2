@@ -26,7 +26,22 @@ body {
   font-size: 16px;
 }
 
-#noTeams {
+.register {
   text-align: center;
+  color: white;
+}
+
+label{
+    display:inline-block;
+    width: 100px;
+}
+
+.inputs {
+  color: black;
+}
+
+.registration {
+  display: block;
+  margin: auto;
   color: white;
 }

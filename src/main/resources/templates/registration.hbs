@@ -1,0 +1,39 @@
+
+{{#partial "content"}}
+
+    <div class="jumbotron">
+        <h1>Registration</h1>
+    </div>
+    <div class="container-fluid registration">
+        <form action="/registration/success" method="post">
+            <div class="form-group">
+                <label for="event">Which Hackathon? </label>
+                <select id="eve       nt" name="event">
+                    {{#each hacks}}
+                        <option value="{{focus}}" class="inputs">{{focus}}</option>
+                    {{/each}}
+                </select>
+                {{#each hacks}}
+                {{/each}}
+            </div>
+
+            <div class="form-group">
+                <label for="name">Team name: </label>
+                <input id="name" name="name" type="text" class="inputs" required>
+            </div>
+            <div class="form-group">
+                <label for="blurb">Give us a brief blurb about your squad: </label>
+                <input id="blurb" name="blurb" type="text" class="inputs"required>
+            </div>
+            <div class="form-group">
+                <label for="members">Initial members: </label>
+                <input id="members" name="members" type="number" class="inputs" required>
+            </div>
+            <button type="submit" class="btn btn-info">Register</button>
+        </form>
+    </div>
+
+    {{/partial}}
+
+
+{{> layout.hbs}}

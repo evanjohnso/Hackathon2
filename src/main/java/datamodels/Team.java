@@ -1,6 +1,7 @@
 package datamodels;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ public class Team {
     private String teamName;
     private String teamBlurb;
     private ArrayList<Members> theSquad = new ArrayList<Members>();
+    private static ArrayList<Team> instances = new ArrayList<Team>();
 
 
     //Constructor
@@ -15,8 +17,9 @@ public class Team {
         this.teamName = teamName;
         this.teamBlurb = teamBlurb;
         //Add member skeletons to have information updated later closer to start date
-        for (int i=0; i <= initialMembers; i++)
+        for (int i=0; i < initialMembers; i++)
             theSquad.add(new Members());
+        instances.add(this);
     }
 
     //Setters
@@ -73,5 +76,15 @@ public class Team {
 
     public ArrayList<Members> getTheSquad() {
         return theSquad;
+    }
+
+    public static Team findTeam(String teamName) {
+        Team theTeam = null;
+        for (Team team: instances) {
+            String theName = team.getTeamName();
+            if (theName.equals(teamName))
+                theTeam = team;
+        }
+        return theTeam;
     }
 }
