@@ -14,6 +14,7 @@ public class HackathonTest {
 
     @After
     public void tearDown() throws Exception {
+        Hackathon.getInstances().clear();
     }
 
     @Test

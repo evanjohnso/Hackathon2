@@ -2,11 +2,12 @@ package datamodels;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Team {
     private String teamName;
     private String teamBlurb;
-    private ArrayList<Members> theSquad;
+    private List<Members> theSquad = new ArrayList<Members>();
 
 
     //Constructor
@@ -42,6 +43,10 @@ public class Team {
     }
 
     public int getMembers() {
+        return theSquad.size();
+    }
+
+    public int getTheSquad() {
         return theSquad.size();
     }
 }
