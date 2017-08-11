@@ -31,6 +31,13 @@ public class Team {
     public void addMember(Members additional) {
         this.theSquad.add(additional);
     }
+    //This removeMember method does not work if you don't have a separate findMember method to call inside..you will get
+    //concurrent modification exception
+    //                          pass individual as object to be removed
+    //      for (Members member: theSquad) {
+//            if (member == individual)
+                //    theSquad.remove(member);
+                //Confused as to why this doesn't work
 
     public boolean removeMember(Members ditchEm) {
         boolean removed = true;

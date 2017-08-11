@@ -11,6 +11,9 @@ public class HackathonTest {
     public Hackathon setUp() {
         return new Hackathon("Java");
     }
+    public Team setUpTeam() {
+        return new Team("Ging Squad", "One day we'll rull the world", 7);
+    }
 
     @After
     public void tearDown() throws Exception {
@@ -28,5 +31,15 @@ public class HackathonTest {
         Hackathon testHack = setUp();
         Hackathon hack2 = new Hackathon("Python");
         assertEquals(2, Hackathon.getInstances().size());
+    }
+
+    @Test
+    public void createAHackathonAndAddTeams_true() {
+        Hackathon testHack = setUp();
+        Team team1 = setUpTeam();
+        Team team2 = setUpTeam();
+        testHack.addTeam(team1);
+        testHack.addTeam(team2);
+        assertEquals(2, testHack.getNumberOfTeams());
     }
 }
