@@ -27,5 +27,4 @@ public class TeamTest {
         assertEquals(8, testTeam.getTheSquad());
     }
 
-
 }
