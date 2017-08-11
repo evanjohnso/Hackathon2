@@ -73,9 +73,6 @@ public class App {
         //If team wants to edit or remove team members
         get("/edit", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
-//            String teamName = request.params("team");
-//            Team theTeam = Team.findTeam(teamName);
-//            data.put("team", theTeam);
             return new ModelAndView(data, "edit.hbs");
         }, new HandlebarsTemplateEngine());
         //Update name
@@ -119,7 +116,6 @@ public class App {
             if (thisTeam != null) {
                 thisTeam.removeMember(name);
             }
-
             response.redirect("/hackathons");
             return null;
         });
