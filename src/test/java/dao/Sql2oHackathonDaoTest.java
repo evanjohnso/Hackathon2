@@ -38,19 +38,46 @@ public class Sql2oHackathonDaoTest {
     public void addHack() throws Exception {
         Hackathon test = tester();
         hackDao.addHack(test);
-        assertEquals(0, hackDao.getAllHacks().size());
+        assertEquals(1, hackDao.getAllHacks().size());
+    }
+
+    @Test
+    public void addHackAddsIdProperly() throws  Exception {
+        Hackathon test = tester();
+        hackDao.addHack(test);
+
+        Hackathon test2 = tester();
+        hackDao.addHack(test2);
+
+        Hackathon test3 = tester();
+        hackDao.addHack(test3);
+        assertEquals(3, test3.getId());
     }
 
     @Test
     public void findHack() throws Exception {
-    }
+        Hackathon test = tester();
+        hackDao.addHack(test);
 
-    @Test
-    public void getAllHacks() throws Exception {
+        Hackathon test2 = tester();
+        hackDao.addHack(test2);
+
+        Hackathon test3 = tester();
+        hackDao.addHack(test3);
+        assertEquals(test3, hackDao.findHack(test3.getId()));
     }
 
     @Test
     public void updateHack() throws Exception {
+        Hackathon test = tester();
+        hackDao.addHack(test);
+
+        Hackathon test2 = tester();
+        hackDao.addHack(test2);
+        hackDao.updateHack(test2.getId(), "Seattle");
+        Hackathon updated = hackDao.findHack(test2.getId());
+        assertEquals("Seattle", updated.getLocation());
+
     }
 
     @Test

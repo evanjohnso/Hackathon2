@@ -31,6 +31,7 @@ public class Hackathon {
     public String getFocus() {
         return focus;
     }
+    public int getId() { return id; }
 
 
     @Override
