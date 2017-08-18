@@ -31,7 +31,6 @@ public class App {
         Sql2oTeamDao teamDao = new Sql2oTeamDao(neuralPathway);
         Sql2oMemberDao memberDao = new Sql2oMemberDao(neuralPathway);
 
-
         //Homepage displays welcome blurb and link to continue on
         get("/", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
@@ -41,7 +40,6 @@ public class App {
         //Hackathons displays all current hackathons around
         get("/hackathons", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
-
             int size = hackDao.getAllHacks().size();
             //If no hacks, display a few to get started
             if (size == 0) {
@@ -50,16 +48,15 @@ public class App {
                 hackDao.addHack(new Hackathon("Ruby", "San Fransisco, CA"));
             }
             data.put("hacks", hackDao.getAllHacks());
-            System.out.println(hackDao.getAllHacks().size());
-
             return new ModelAndView(data, "localHacks.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //display a form registering for a hackathon
         get("hackathons/registration", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
             return new ModelAndView(data, "registration.hbs");
         }, new HandlebarsTemplateEngine());
-
+        //process a new hackathon event
         post("/hackathons/new", (request, response) -> {
             String focus = request.queryParams("focus");
             String location = request.queryParams("location");
@@ -74,7 +71,6 @@ public class App {
             int hackId = Integer.parseInt(request.params("id"));
             Hackathon thisHack = hackDao.findHack(hackId);
             List<Team> theseTeams = teamDao.getAllTeamsByHack(hackId);
-
             data.put("thisHack", thisHack);
             data.put("teams", theseTeams);
             return new ModelAndView(data, "specificHack.hbs");
@@ -84,7 +80,6 @@ public class App {
         get("/hackathons/:id/teams/registration", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
             int thisHackId = Integer.parseInt(request.params("id"));
-
             data.put("thisHack", thisHackId);
             return new ModelAndView(data, "registration.hbs");
         }, new HandlebarsTemplateEngine());
@@ -92,14 +87,11 @@ public class App {
         //After team is registered, link back to Hack page and update
         post("/hackathons/:hackId", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
-
             int hackId = Integer.parseInt(request.params("hackId"));
             String event = request.queryParams("event");
             String newName = request.queryParams("name");
             String newBlurb = request.queryParams("blurb");
-
             teamDao.addTeam(new Team(newName, newBlurb, hackId));
-
             response.redirect("/hackathons/" + hackId);
             return null;
         });
@@ -114,7 +106,7 @@ public class App {
             data.put("thisTeam", teamDao.findById(teamId));
             data.put("squad", squadMembers);
             data.put("members", squadMembers.size());
-            return new ModelAndView(data, "edit.hbs");
+            return new ModelAndView(data, "teamDetails.hbs");
         }, new HandlebarsTemplateEngine());
 //        //Update name
         post("/team/:teamId/changedName", (request, response) -> {
@@ -131,11 +123,9 @@ public class App {
             Map<String, Object> data = new HashMap<>();
             int teamId = Integer.parseInt(request.params("teamId"));
             int hackId = teamDao.findById(teamId).getHackId();
-
             String name = request.queryParams("name");
             String city = request.queryParams("city");
             memberDao.add(new Members(name, city, teamId, hackId));
-
             response.redirect("/hackathons/" + hackId + "/team/" + teamId + "/edit");
             return null;
         });
@@ -152,15 +142,31 @@ public class App {
                 return null;
             } else
                 memberDao.removeMember(finders.getMemberId());
-
             response.redirect("/hackathons/" + hackId + "/team/" + teamId + "/edit");
             return null;
         });
-
+        //remove the entire hack
         get("/hackathons/:hackId/remove", (request, response) -> {
             int hackId = Integer.parseInt(request.params("hackId") );
             hackDao.removeHack(hackId);
             response.redirect("/hackathons");
+            return null;
+        });
+        //remove a team
+        get("/team/:teamId/remove", (request, response) -> {
+            int teamId = Integer.parseInt(request.params("teamId") );
+            int hackId = teamDao.findById(teamId).getHackId();
+            teamDao.removeTeam(teamId);
+            response.redirect("/hackathons/" + hackId);
+            return null;
+        });
+        //update a team blurb
+        post("/team/:teamId/changedBlurb", (request, response) -> {
+            int teamId = Integer.parseInt(request.params("teamId") );
+            int hackId = teamDao.findById(teamId).getHackId();
+            String blurb = request.queryParams("blurb");
+            teamDao.changeBlurb(blurb, teamId);
+            response.redirect("/hackathons/" + hackId + "/team/" + teamId + "/edit");
             return null;
         });
     }

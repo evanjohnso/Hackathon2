@@ -16,6 +16,11 @@ body {
   color: white;
 }
 
+.col-md-6 {
+    text-align: center;
+    color: white;
+}
+
 
 .hackathons {
      height: 250px;
@@ -43,6 +48,8 @@ p {
 .fluidImages:hover {
     opacity: .2;
 }
+
+
 
 .jumbotron {
   text-align: center;
