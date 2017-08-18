@@ -4,35 +4,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Members {
+    private int hackId;
+    private int teamId;
     private String memberName;
-    //Use this for later with a database && SQL and making some aggregate data
     private String memberLocation;
-    private int memberAge;
-    private List<Members> eventTotal = new ArrayList<Members>();
 
     //Constructor
-    public Members() {
-        eventTotal.add(this);
-
+    public Members(String name, String location, int teamId, int hackId) {
+        memberName = name;
+        memberLocation = location;
+        this.teamId = teamId;
+        this.hackId = hackId;
     }
 
     //Setters
-    //Allow administrator to create a new member with all info in form later
-    public void setNewMember(String name, String location, int age) {
-        memberName = name;
-        memberLocation = location;
-        memberAge = age;
+    public void setHackId(int hackId) {
+        this.hackId = hackId;
     }
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
+    }
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+    public void setMemberLocation(String memberLocation) {
+        this.memberLocation = memberLocation;
+    }
+
     //Getters
+    public int getHackId() {
+        return hackId;
+    }
+    public int getTeamId() {
+        return teamId;
+    }
     public String getMemberName() {
         return memberName;
     }
-
     public String getMemberLocation() {
         return memberLocation;
     }
 
-    public int getMemberAge() {
-        return memberAge;
+    //Redefine Equality
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Members members = (Members) o;
+
+        if (teamId != members.teamId) return false;
+        if (!memberName.equals(members.memberName)) return false;
+        return memberLocation.equals(members.memberLocation);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = teamId;
+        result = 31 * result + memberName.hashCode();
+        result = 31 * result + memberLocation.hashCode();
+        return result;
     }
 }
