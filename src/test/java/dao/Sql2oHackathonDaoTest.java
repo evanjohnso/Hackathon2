@@ -21,12 +21,10 @@ public class Sql2oHackathonDaoTest {
         hackDao = new Sql2oHackathonDao(access);
         server = access.open();
     }
-
     @After
     public void tearDown() throws Exception {
         server.close();
     }
-
     //helper
     public Hackathon tester() {
         return new Hackathon("Java", "Portland, OR");
@@ -74,7 +72,7 @@ public class Sql2oHackathonDaoTest {
 
         Hackathon test2 = tester();
         hackDao.addHack(test2);
-        hackDao.updateHack(test2.getId(), "Seattle");
+        hackDao.updateLocation(test2.getId(), "Seattle");
         Hackathon updated = hackDao.findHack(test2.getId());
         assertEquals("Seattle", updated.getLocation());
 
@@ -82,6 +80,14 @@ public class Sql2oHackathonDaoTest {
 
     @Test
     public void removeHack() throws Exception {
+        Hackathon test = tester();
+        hackDao.addHack(test);
+
+        Hackathon test2 = tester();
+        hackDao.addHack(test2);
+        hackDao.removeHack(test.getId());
+        assertEquals(1, hackDao.getAllHacks().size());
+
     }
 
 }

@@ -11,7 +11,6 @@ CREATE TABLE IF NOT EXISTS teams (
     hackId INTEGER,
     name VARCHAR,
     blurb VARCHAR,
-    squad INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS members (

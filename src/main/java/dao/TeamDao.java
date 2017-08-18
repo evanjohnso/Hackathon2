@@ -3,6 +3,8 @@ package dao;
 
 import datamodels.*;
 
+import java.util.List;
+
 public interface TeamDao {
 
     //Create
@@ -10,6 +12,7 @@ public interface TeamDao {
 
     //Read
     Team findById(int teamId);
+    List<Team> getAllTeamsByHack(int hackID);
 
     //Update
     void changeName(String newName, int teamId);

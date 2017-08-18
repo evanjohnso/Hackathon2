@@ -28,12 +28,12 @@ public class Team {
         this.teamBlurb = teamBlurb;
     }
 
-    public int setTeamId() {
-        return teamId;
+    public void setTeamId(int id) {
+        teamId = id;
     }
 
-    public int setHackId() {
-        return hackId;
+    public void setHackId(int hack) {
+        hackId = hack;
     }
 
 

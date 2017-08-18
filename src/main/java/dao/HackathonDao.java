@@ -13,7 +13,7 @@ public interface HackathonDao {
     List<Hackathon> getAllHacks();
 
     //Update
-    void updateHack(int hackId, String newLocation);
+    void updateLocation(int hackId, String newLocation);
 
     //Delete
     void removeHack(int hackId);

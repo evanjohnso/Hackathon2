@@ -22,8 +22,7 @@ public class Sql2oHackathonDao implements HackathonDao {
                     .addParameter("location", newHack.getLocation())
                     .addColumnMapping("FOCUS", "focus")
                     .addColumnMapping("LOCATION", "location")
-                    .executeUpdate()
-                    .getKey();
+                    .executeUpdate().getKey();
             newHack.setId(newId);
         } catch (Sql2oException ex) {
             ex.printStackTrace();
@@ -46,7 +45,7 @@ public class Sql2oHackathonDao implements HackathonDao {
         }
     }
 
-    public void updateHack(int hackId, String newLocation) {
+    public void updateLocation(int hackId, String newLocation) {
         try (Connection conn = sql2o.open()) {
             conn.createQuery("UPDATE hackathons SET location = :location WHERE id = :id")
                     .addParameter("location", newLocation)
