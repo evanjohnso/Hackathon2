@@ -78,6 +78,7 @@ public class Sql2oMemberDao implements MembersDao {
                     .addColumnMapping("NAME", "memberName")
                     .addColumnMapping("LOCATION", "memberLocation")
                     .executeAndFetchFirst(Members.class);
+//                executeScalar(Integer.class) should work here to return one column piece, but it throws null pointer if not found..
         }
     }
 }

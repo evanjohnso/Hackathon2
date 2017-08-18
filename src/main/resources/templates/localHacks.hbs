@@ -1,3 +1,8 @@
+{{#partial "scripts"}}
+    <link rel="stylesheet" href="/homepage.css">
+{{/partial}}
+
+
 {{#partial "content"}}
 
     <div class="jumbotron">Local Hack-A-thons!</div>
@@ -5,23 +10,26 @@
     <div class="row container-fluid">
         {{#if hacks}}
             {{#each hacks}}
-                <a href="/hackathons/{{id}}">
-                    <div class="container-fluid col-md-4 hackathons">
-                        <div class="imgText container">
-                            <h1>{{focus}} </h1>
-                            <h6>{{location}}</h6>
-                        </div>
-                        <img src="/images/img-{{id}}.jpg" alt="techy image" class="fluidImages">
-                    </div>
-                </a>
+
+                <div class="container-fluid col-md-4 hackathons">
+                    <a href="/hackathons/{{id}}">
+                    <h1 class="imgText">{{focus}}<br><small>{{location}}</small></h1>
+                    <img src="/images/img-{{id}}.jpg" alt="techy image" class="fluidImages">
+                    </a>
+                </div>
+
             {{/each}}
         {{else}}
             <div class="col-md-12">
                 <h1>Looks like we have no Hackathons coming up.</h1>
-                <h3>If you know of any, help us out and post it here.</h3>
-                <a href="/hackathons/registration"></a><button class="btn btn-primary">Register</button></a>
             </div>
         {{/if}}
+        <div class="row">
+            <div class="col-md-12 hackerSpace container-fluid">
+                <h3>If you know of any upcoming Hackathons, help us out and post it here.</h3>
+                <a href="/hackathons/registration"><h1 class="btn btn-primary">Register</h1></a>
+            </div>
+        </div>
     </div>
 
 {{/partial}}

@@ -8,6 +8,7 @@ import org.sql2o.Sql2o;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
+import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,8 +42,7 @@ public class App {
         get("/hackathons", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
 
-            List<Hackathon> listAll = hackDao.getAllHacks();
-            int size = listAll.size();
+            int size = hackDao.getAllHacks().size();
             //If no hacks, display a few to get started
             if (size == 0) {
                 hackDao.addHack(new Hackathon("Java", "Portland, OR") );
@@ -50,9 +50,23 @@ public class App {
                 hackDao.addHack(new Hackathon("Ruby", "San Fransisco, CA"));
             }
             data.put("hacks", hackDao.getAllHacks());
+            System.out.println(hackDao.getAllHacks().size());
 
             return new ModelAndView(data, "localHacks.hbs");
         }, new HandlebarsTemplateEngine());
+
+        get("hackathons/registration", (request, response) -> {
+            Map<String, Object> data = new HashMap<>();
+            return new ModelAndView(data, "registration.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/hackathons/new", (request, response) -> {
+            String focus = request.queryParams("focus");
+            String location = request.queryParams("location");
+            hackDao.addHack(new Hackathon(focus, location));
+            response.redirect("/hackathons");
+            return null;
+        });
 
         //Display the registered teams, or link to a form to register a team if none already
         get("/hackathons/:id", (request, response) -> {
@@ -95,9 +109,11 @@ public class App {
             Map<String, Object> data = new HashMap<>();
             int hackId = Integer.parseInt(request.params("hackId"));
             int teamId = Integer.parseInt(request.params("teamId"));
+            List<Members> squadMembers = memberDao.getAllMembersByTeam(teamId);
 
             data.put("thisTeam", teamDao.findById(teamId) );
-
+            data.put("squad", squadMembers);
+            data.put("members", squadMembers.size());
             return new ModelAndView(data, "edit.hbs");
         }, new HandlebarsTemplateEngine());
 //        //Update name
@@ -107,7 +123,7 @@ public class App {
             String newName = request.queryParams("newName");
             teamDao.changeName(newName, teamId);
             int hackId = teamDao.findById(teamId).getHackId();
-            response.redirect("/hackathons/" + hackId);
+            response.redirect("/hackathons/" + hackId + "/team/" + teamId + "/edit");
             return null;
         });
 //        //Add new team member
@@ -120,7 +136,7 @@ public class App {
             String city = request.queryParams("city");
             memberDao.add(new Members(name, city, teamId, hackId));
 
-            response.redirect("/hackathons/" + hackId);
+            response.redirect("/hackathons/" + hackId + "/team/" + teamId + "/edit");
             return null;
         });
 //        //Remove specific team member
@@ -129,9 +145,15 @@ public class App {
             int teamId = Integer.parseInt(request.params("teamId"));
             int hackId = teamDao.findById(teamId).getHackId();
             String name = request.queryParams("noName");
-            int finders = memberDao.findByName(name).getMemberId();
-            memberDao.removeMember(finders);
-            response.redirect("/hackathons/" + hackId);
+            Members finders = memberDao.findByName(name);
+            if (finders == null) {
+                JOptionPane.showMessageDialog(null, name + " does not seem to be in your team!");
+                response.redirect("/hackathons/" + hackId + "/team/" + teamId + "/edit");
+                return null;
+            } else
+                memberDao.removeMember(finders.getMemberId());
+
+            response.redirect("/hackathons/" + hackId + "/team/" + teamId + "/edit");
             return null;
         });
     }

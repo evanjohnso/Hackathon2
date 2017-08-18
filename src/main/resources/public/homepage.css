@@ -1,0 +1,30 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background: url("images/background-home.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: georgia;
+  text-align: center;
+  color: white;
+}
+
+
+#homeJumbo {
+    padding-top: 20em;
+    background: inherit;
+    margin: auto;
+}
+
+#homeTitle {
+    padding-bottom: 5%;
+}
+
+.register {
+  text-align: center;
+  color: white;
+}

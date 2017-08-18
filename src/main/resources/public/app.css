@@ -9,12 +9,13 @@ body {
   background-size: cover;
   background-attachment: fixed;
   font-family: georgia;
-}
+  }
 
 .col-md-4 {
   text-align: center;
   color: white;
 }
+
 
 .hackathons {
      height: 250px;
@@ -23,11 +24,9 @@ body {
 
 .imgText {
     position: absolute;
-    top: 80px;
-    left: 80px;
+    top: 70px;
+    left: 70px;
     font-size: 50px;
-    font-color: white;
-    font-weight: bold;
 }
 
 .fluidImages {
@@ -43,21 +42,35 @@ body {
   text-align: center;
   font-size: 100px;
   color: white;
-  background: inherit;
+  background: #595F5A;
 }
 
 .jumbotron h6 {
   font-size: 16px;
 }
 
-.register {
-  text-align: center;
-  color: white;
+.squadMems {
+    background: inherit;
+    position: relative;
+    height: 150px;
+    margin-bottom: 30px;
+
+}
+
+
+.hackerSpace {
+    text-align: center;
+    margin-top: 25%;
+    font-size: 30px;
+    background-color: #595F5A;
+    color: black;
+    padding-bottom: 15px;
 }
 
 label{
     display:inline-block;
     width: 100px;
+    color: white;
 }
 
 .inputs {
@@ -70,10 +83,7 @@ label{
   color: white;
 }
 
-.homepage {
-  margin-top: 50px;
-}
-
-option {
-  color: black;
+.register {
+  text-align: center;
+  color: white;
 }

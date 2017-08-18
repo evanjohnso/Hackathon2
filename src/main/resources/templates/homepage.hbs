@@ -1,13 +1,34 @@
-{{#partial "content"}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hackathon!
+    </title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
 
-    <div class="jumbotron homepage">
-        <h1>Hack-A-Thon</h1>
-        <h6>The word "hackathon" is a portmanteau of the words "hack" and "marathon", where "hack" is used in the sense of exploratory              programming, not its alternate meaning as a reference to computer crime.</h6>
-        <h6>-Wikipedia</h6>
-        <br>
-        <a href="/hackathons"><button class="btn btn-danger register">Enter</button></a>
+    <link rel="stylesheet" href="/homepage.css">
+</head>
+<body>
+
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="/hackathons">Hack A Thon</a></li>
+</ul>
+
+<div class="container-fluid">
+
+
+    <div class="jumbotron" id="homeJumbo">
+        <h1 id="homeTitle">Hack-A-Thon</h1>
+
+        <h4>The word "hackathon" is a portmanteau of the words "hack" and "marathon", where "hack" is used in the sense
+            of exploratory programming, not its alternate meaning as a reference to computer crime.</h4>
+        <h5>-Wikipedia</h5>
+        <a href="/hackathons">
+            <h1 class="btn register">Enter</h1>
+        </a>
     </div>
 
-{{/partial}}
 
-{{> layout.hbs}}
+</div>
+
+</body>
+</html>
