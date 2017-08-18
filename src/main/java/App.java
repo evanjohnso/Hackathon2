@@ -24,7 +24,7 @@ public class App {
         staticFileLocation("/public");
         //Create a connection pathway
         String connectionString = "jdbc:h2:~/hackathons.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o neuralPathway = new Sql2o(connectionString,"","");
+        Sql2o neuralPathway = new Sql2o(connectionString, "", "");
 
         //Instantiate Data Access Objects via neuralPathway
         Sql2oHackathonDao hackDao = new Sql2oHackathonDao(neuralPathway);
@@ -45,7 +45,7 @@ public class App {
             int size = hackDao.getAllHacks().size();
             //If no hacks, display a few to get started
             if (size == 0) {
-                hackDao.addHack(new Hackathon("Java", "Portland, OR") );
+                hackDao.addHack(new Hackathon("Java", "Portland, OR"));
                 hackDao.addHack(new Hackathon("Python", "Seattle, WA"));
                 hackDao.addHack(new Hackathon("Ruby", "San Fransisco, CA"));
             }
@@ -71,7 +71,7 @@ public class App {
         //Display the registered teams, or link to a form to register a team if none already
         get("/hackathons/:id", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
-            int hackId = Integer.parseInt(request.params("id") );
+            int hackId = Integer.parseInt(request.params("id"));
             Hackathon thisHack = hackDao.findHack(hackId);
             List<Team> theseTeams = teamDao.getAllTeamsByHack(hackId);
 
@@ -111,7 +111,7 @@ public class App {
             int teamId = Integer.parseInt(request.params("teamId"));
             List<Members> squadMembers = memberDao.getAllMembersByTeam(teamId);
 
-            data.put("thisTeam", teamDao.findById(teamId) );
+            data.put("thisTeam", teamDao.findById(teamId));
             data.put("squad", squadMembers);
             data.put("members", squadMembers.size());
             return new ModelAndView(data, "edit.hbs");
@@ -154,6 +154,13 @@ public class App {
                 memberDao.removeMember(finders.getMemberId());
 
             response.redirect("/hackathons/" + hackId + "/team/" + teamId + "/edit");
+            return null;
+        });
+
+        get("/hackathons/:hackId/remove", (request, response) -> {
+            int hackId = Integer.parseInt(request.params("hackId") );
+            hackDao.removeHack(hackId);
+            response.redirect("/hackathons");
             return null;
         });
     }

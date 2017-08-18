@@ -25,9 +25,11 @@
                 <h4>Help us out by registering a team!</h4>
                 <a href="/hackathons/{{thisHack.id}}/teams/registration"><button class="btn btn-info">Register</button></a>
             </div>
-
-
         {{/if}}
+        <div class="container-fluid row register">
+            <h1>Did this event already occur?</h1>
+            <a href="/hackathons/{{thisHack.id}}/remove"><button class="btn btn-info">Remove</button></a>
+        </div>
 
 
 {{/partial}}
