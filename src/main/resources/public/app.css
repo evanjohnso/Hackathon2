@@ -8,11 +8,35 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  font-family: georgia;
 }
 
 .col-md-4 {
   text-align: center;
   color: white;
+}
+
+.hackathons {
+     height: 250px;
+     position: relative;
+}
+
+.imgText {
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    font-size: 50px;
+    font-color: white;
+    font-weight: bold;
+}
+
+.fluidImages {
+  height: 100%;
+  width: 100%;
+}
+
+.fluidImages:hover {
+    opacity: .3;
 }
 
 .jumbotron {

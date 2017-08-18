@@ -3,13 +3,25 @@
     <div class="jumbotron">Local Hack-A-thons!</div>
 
     <div class="row container-fluid">
-    {{#each hacks}}
-        <div class="container-fluid col-md-4">
-            <h1>{{focus}} </h1>
-            <h6>{{location}}</h6>
-            <a href="/hackathons/{{focus}}"><button class="btn btn-info">Inspect</button></a>
-        </div>
-    {{/each}}
+        {{#if hacks}}
+            {{#each hacks}}
+                <a href="/hackathons/{{id}}">
+                    <div class="container-fluid col-md-4 hackathons">
+                        <div class="imgText container">
+                            <h1>{{focus}} </h1>
+                            <h6>{{location}}</h6>
+                        </div>
+                        <img src="/images/img-{{id}}.jpg" alt="techy image" class="fluidImages">
+                    </div>
+                </a>
+            {{/each}}
+        {{else}}
+            <div class="col-md-12">
+                <h1>Looks like we have no Hackathons coming up.</h1>
+                <h3>If you know of any, help us out and post it here.</h3>
+                <a href="/hackathons/registration"></a><button class="btn btn-primary">Register</button></a>
+            </div>
+        {{/if}}
     </div>
 
 {{/partial}}

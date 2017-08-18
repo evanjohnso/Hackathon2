@@ -1,6 +1,6 @@
 {{#partial "content"}}
     <div class="jumbotron">
-    {{#if thisHack}}
+
         <h1>{{thisHack.focus}}</h1>
         <h6>{{thisHack.location}}</h6>
     </div>
@@ -10,7 +10,7 @@
                     <div class="container-fluid col-md-4">
                         <h1>{{teamName}} </h1>
                         <h6>{{teamBlurb}}</h6>
-                        <h6>Currently {{teamSize}} team members.</h6>
+                        <!--<h6>Currently THIS WILL BE A MEMBERS METHOD TO RETURN ALL MEMBERS team members.</h6>-->
                         <a href="/edit"><button class="btn btn-info">Add/Edit</button></a>
                     </div>
                 {{/each}}
@@ -20,17 +20,17 @@
                 <a href="/registration"><button class="btn btn-info">Register</button></a>
             </div>
         {{else}}
+
+
             <div class="container-fluid register">
                 <h1>Looks like we have no teams yet for {{thisHack.focus}}</h1>
                 <h4>Help us out by registering a team!</h4>
-                <a href="/registration"><button class="btn btn-info">Register</button></a>
+                <a href="/hackathons/{{thisHack.id}}/teams/registration"><button class="btn btn-info">Register</button></a>
             </div>
+
+
         {{/if}}
 
-
-    {{else}}
-        <h1>Something really weird happened, sorry!</h1>
-    {{/if}}
 
 {{/partial}}
 
