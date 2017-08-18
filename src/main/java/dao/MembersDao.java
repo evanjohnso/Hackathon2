@@ -3,6 +3,8 @@ package dao;
 
 import datamodels.*;
 
+import java.util.List;
+
 public interface MembersDao {
 
 
@@ -11,6 +13,10 @@ public interface MembersDao {
 
     //Read
     Members findById(int memberId);
+    List<Members> getAllMembersByTeam(int teamId);
+
+    //Update
+    //Can't change, have to remove member and add a new one
 
     //Delete
     void removeMember(int memberId);

@@ -6,6 +6,7 @@ import java.util.List;
 public class Members {
     private int hackId;
     private int teamId;
+    private int memberId;
     private String memberName;
     private String memberLocation;
 
@@ -18,6 +19,9 @@ public class Members {
     }
 
     //Setters
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
     public void setHackId(int hackId) {
         this.hackId = hackId;
     }
@@ -32,6 +36,9 @@ public class Members {
     }
 
     //Getters
+    public int getMemberId() {
+        return memberId;
+    }
     public int getHackId() {
         return hackId;
     }

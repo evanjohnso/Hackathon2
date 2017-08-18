@@ -19,5 +19,4 @@ CREATE TABLE IF NOT EXISTS members (
     hackId INTEGER,
     name VARCHAR,
     location VARCHAR,
-    age INTEGER
 );
