@@ -11,13 +11,13 @@
                         <h1>{{teamName}} </h1>
                         <h6>{{teamBlurb}}</h6>
                         <!--<h6>Currently THIS WILL BE A MEMBERS METHOD TO RETURN ALL MEMBERS team members.</h6>-->
-                        <a href="/edit"><button class="btn btn-info">Add/Edit</button></a>
+                        <a href="/hackathons/{{thisHack.id}}/team/{{teamId}}/edit"><button class="btn btn-info">Add/Edit</button></a>
                     </div>
                 {{/each}}
             </div>
             <div class="container-fluid row register">
                 <h1>Want to register another team?</h1>
-                <a href="/registration"><button class="btn btn-info">Register</button></a>
+                <a href="/hackathons/{{thisHack.id}}/teams/registration"><button class="btn btn-info">Register</button></a>
             </div>
         {{else}}
 

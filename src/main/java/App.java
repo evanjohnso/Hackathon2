@@ -69,9 +69,9 @@ public class App {
         //Display a form for a contributor to register a new team
         get("/hackathons/:id/teams/registration", (request, response) -> {
             Map<String, Object> data = new HashMap<>();
+            int thisHackId = Integer.parseInt(request.params("id"));
 
-
-            data.put("hacks", request.session().attribute("hacks"));
+            data.put("thisHack", thisHackId);
             return new ModelAndView(data, "registration.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -90,54 +90,49 @@ public class App {
             return null;
         });
 
-        //If team wants to edit or remove team members
-//        get("/edit", (request, response) -> {
-//            Map<String, Object> data = new HashMap<>();
-//            return new ModelAndView(data, "edit.hbs");
-//        }, new HandlebarsTemplateEngine());
+//        If team wants to edit or remove team members
+        get("/hackathons/:hackId/team/:teamId/edit", (request, response) -> {
+            Map<String, Object> data = new HashMap<>();
+            int hackId = Integer.parseInt(request.params("hackId"));
+            int teamId = Integer.parseInt(request.params("teamId"));
+
+            data.put("thisTeam", teamDao.findById(teamId) );
+
+            return new ModelAndView(data, "edit.hbs");
+        }, new HandlebarsTemplateEngine());
 //        //Update name
-//        post("/team/changedName", (request, response) -> {
-//            Map<String, Object> data = new HashMap<>();
-//            //Take user input
-//            String oldName = request.queryParams("oldName");
-//            String newName = request.queryParams("newName");
-//            //Look for team in instances array
-//            Team thisTeam = Team.findTeam(oldName);
-//            if (thisTeam != null)
-//                thisTeam.setTeamName(newName);
-//            response.redirect("/hackathons");
-//            return null;
-//        });
+        post("/team/:teamId/changedName", (request, response) -> {
+            Map<String, Object> data = new HashMap<>();
+            int teamId = Integer.parseInt(request.params("teamId"));
+            String newName = request.queryParams("newName");
+            teamDao.changeName(newName, teamId);
+            int hackId = teamDao.findById(teamId).getHackId();
+            response.redirect("/hackathons/" + hackId);
+            return null;
+        });
 //        //Add new team member
-//        post("/team/addMember", (request, response) -> {
-//            Map<String, Object> data = new HashMap<>();
-//            String teamName = request.queryParams("squad");
-//            String name = request.queryParams("name");
-//            String city = request.queryParams("city");
-//            int age = Integer.parseInt(request.queryParams("age"));
-//            Members newGuy = new Members();
-//            newGuy.setNewMember(name, city, age);
-//
-//            //Find what team they are on
-//            Team thisTeam = Team.findTeam(teamName);
-//            if (thisTeam != null)
-//                thisTeam.addMember(newGuy);
-//            response.redirect("/hackathons");
-//            return null;
-//        });
+        post("/team/:teamId/addMember", (request, response) -> {
+            Map<String, Object> data = new HashMap<>();
+            int teamId = Integer.parseInt(request.params("teamId"));
+            int hackId = teamDao.findById(teamId).getHackId();
+
+            String name = request.queryParams("name");
+            String city = request.queryParams("city");
+            memberDao.add(new Members(name, city, teamId, hackId));
+
+            response.redirect("/hackathons/" + hackId);
+            return null;
+        });
 //        //Remove specific team member
-//        post("/team/removeMember", (request, response) -> {
-//            Map<String, Object> data = new HashMap<>();
-//            String teamName = request.queryParams("teamName");
-//            String name = request.queryParams("noName");
-//
-//            //Find team they are on and nuke them
-//            Team thisTeam = Team.findTeam(teamName);
-//            if (thisTeam != null) {
-//                thisTeam.removeMember(name);
-//            }
-//            response.redirect("/hackathons");
-//            return null;
-//        });
+        post("/team/:teamId/removeMember", (request, response) -> {
+            Map<String, Object> data = new HashMap<>();
+            int teamId = Integer.parseInt(request.params("teamId"));
+            int hackId = teamDao.findById(teamId).getHackId();
+            String name = request.queryParams("noName");
+            int finders = memberDao.findByName(name).getMemberId();
+            memberDao.removeMember(finders);
+            response.redirect("/hackathons/" + hackId);
+            return null;
+        });
     }
 }

@@ -14,6 +14,7 @@ public interface MembersDao {
     //Read
     Members findById(int memberId);
     List<Members> getAllMembersByTeam(int teamId);
+    Members findByName(String findIt);
 
     //Update
     //Can't change, have to remove member and add a new one

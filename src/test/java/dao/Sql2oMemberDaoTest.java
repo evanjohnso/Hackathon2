@@ -84,4 +84,13 @@ public class Sql2oMemberDaoTest {
         assertEquals(2, memberDao.getAllMembersByTeam(1).size());
     }
 
+    @Test
+    public void findIdByName() throws Exception {
+        Members testing = tester();
+        memberDao.add(testing);
+        Members newGuy = new Members("Pablo", "Seattle", 12,23);
+        memberDao.add(newGuy);
+        assertEquals(newGuy, memberDao.findByName("Pablo"));
+    }
+
 }

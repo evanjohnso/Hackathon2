@@ -1,4 +1,7 @@
 {{#partial "content"}}
+    <div class="jumbotron">
+        <h1>{{thisTeam.focus}}</h1>
+    </div>
 
     <div class="container-fluid row">
         <div class="jumbotron">
@@ -7,12 +10,7 @@
         <div class="container col-md-4">
             <h1>Add Member</h1>
             <h3>We just need a little bit of information about them</h3>
-
-            <form action="/team/addMember" method="post">
-                <div class="form-group">
-                    <label for="squad">Team Name: </label>
-                    <input id="squad" name="squad" type="text" class="inputs" required>
-                </div>
+            <form action="/team/{{thisTeam.teamId}}/addMember" method="post">
                 <div class="form-group">
                     <label for="name">Name: </label>
                     <input id="name" name="name" type="text" class="inputs" required>
@@ -21,20 +19,16 @@
                     <label for="city">City: </label>
                     <input id="city" name="city" type="text" class="inputs"required>
                 </div>
-                <div class="form-group">
-                    <label for="age">Age: </label>
-                    <input id="age" name="age" type="number" class="inputs" required>
-                </div>
+                <!--<div class="form-group">-->
+                    <!--<label for="age">Age: </label>-->
+                    <!--<input id="age" name="age" type="number" class="inputs" required>-->
+                <!--</div>-->
                 <button type="submit" class="btn btn-info">Add</button>
             </form>
         </div>
         <div class="container col-md-4">
             <h1>Change Name</h1>
-            <form action="/team/changedName" method="post">
-                <div class="form-group">
-                    <label for="oldName">Old Name: </label>
-                    <input id="oldName" name="oldName" type="text" class="inputs" required>
-                </div>
+            <form action="/team/{{thisTeam.teamId}}/changedName" method="post">
                 <div class="form-group">
                     <label for="newName">New Name: </label>
                     <input id="newName" name="newName" type="text" class="inputs" required>
@@ -44,12 +38,9 @@
         </div>
         <div class="container col-md-4">
             <h1>Remove Member</h1>
-            <h3>All we need is the Squad Name and their name</h3>
-            <form action="/team/removeMember" method="post">
-                <div class="form-group">
-                    <label for="teamName">Team Name: </label>
-                    <input name="teamName" type="text" class="inputs" required>
-                </div>
+            <h3>All we need is their name</h3>
+            <form action="/team/{{thisTeam.teamId}}/removeMember" method="post">
+
                 <div class="form-group">
                     <label for="noName">Their Name:</label>
                     <input id="noName" name="noName" type="text" class="inputs" required>

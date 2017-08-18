@@ -68,4 +68,16 @@ public class Sql2oMemberDao implements MembersDao {
                     .executeUpdate();
         }
     }
+
+    public Members findByName(String findIt) {
+        try (Connection conn = connection.open()) {
+            return conn.createQuery("SELECT * FROM members WHERE name = :name")
+                    .addParameter("name", findIt)
+                    .addColumnMapping("HACKID", "hackId")
+                    .addColumnMapping("TEAMID", "teamId")
+                    .addColumnMapping("NAME", "memberName")
+                    .addColumnMapping("LOCATION", "memberLocation")
+                    .executeAndFetchFirst(Members.class);
+        }
+    }
 }
