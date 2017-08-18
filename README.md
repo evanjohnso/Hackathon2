@@ -9,6 +9,9 @@ _Allows users to browse West Coast Hackathon's and track the teams enrolled_
 * Java
 * Spark
 * Handlebars
+* Postgres
+* SQL
+* IntelliJ IDE
 
 ## Development Specifications
 | Behavior      | Example Input         | Example Output        |

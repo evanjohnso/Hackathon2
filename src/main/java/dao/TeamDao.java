@@ -16,6 +16,7 @@ public interface TeamDao {
 
     //Update
     void changeName(String newName, int teamId);
+    void changeBlurb(String newBlurb, int teamId);
 
     //Delete
     void removeTeam(int teamId);

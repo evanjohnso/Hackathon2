@@ -9,9 +9,6 @@ import org.sql2o.Sql2o;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by Guest on 8/18/17.
- */
 public class Sql2oTeamDaoTest {
     private Sql2oTeamDao teamDao;
     private Connection server;
@@ -62,10 +59,37 @@ public class Sql2oTeamDaoTest {
 
     @Test
     public void changeName() throws Exception {
+        Team test = tester();
+        teamDao.addTeam(test);
+
+        Team test2 = tester();
+        teamDao.addTeam(test2);
+        teamDao.changeName("Boss Man Jonez", test2.getTeamId());
+        Team updated = teamDao.findById(test2.getTeamId());
+        assertEquals("Boss Man Jonez", updated.getTeamName());
+    }
+
+    @Test
+    public void changeBlurb() throws Exception {
+        Team test = tester();
+        teamDao.addTeam(test);
+
+        Team test2 = tester();
+        teamDao.addTeam(test2);
+        teamDao.changeBlurb("We really are the best", test2.getTeamId());
+        Team updated = teamDao.findById(test2.getTeamId());
+        assertEquals("We really are the best", updated.getTeamBlurb());
     }
 
     @Test
     public void removeTeam() throws Exception {
+        Team test = tester();
+        teamDao.addTeam(test);
+
+        Team test2 = tester();
+        teamDao.addTeam(test2);
+        teamDao.removeTeam(test2.getTeamId());
+        assertEquals(1, teamDao.getAllTeamsByHack(1).size());
     }
 
 }

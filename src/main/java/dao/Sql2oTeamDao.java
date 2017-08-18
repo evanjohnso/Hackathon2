@@ -59,8 +59,17 @@ public class Sql2oTeamDao implements TeamDao {
     
     public void changeName(String newName, int teamId) {
         try (Connection conn = sql2o.open()) {
-            conn.createQuery("UPDATE teams SET name = :newName WHERE teamId = :teamId")
+            conn.createQuery("UPDATE teams SET name = :name WHERE teamId = :teamId")
                     .addParameter("name", newName)
+                    .addParameter("teamId", teamId)
+                    .executeUpdate();
+        }
+    }
+
+    public void changeBlurb(String newBlurb, int teamId) {
+        try (Connection conn = sql2o.open()) {
+            conn.createQuery("UPDATE teams SET blurb = :blurb WHERE teamId = :teamId")
+                    .addParameter("blurb", newBlurb)
                     .addParameter("teamId", teamId)
                     .executeUpdate();
         }
